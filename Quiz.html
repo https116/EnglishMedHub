@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English MedHub - Quiz</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f9;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(90deg, #2c3e50, #4ca1af);
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin: 0;
+    }
+
+header h1 a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: inherit;
+    position: relative;
+    display: inline-block;
+}
+
+/* animação underline */
+header h1 a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 3px;
+    background: #fff; /* cor da linha animada */
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+header h1 a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+    nav a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffd700;
+    }
+
+    /* Botão do menu */
+    .menu-btn {
+      position: relative;
+      font-size: 26px;
+      padding: 12px 16px;
+      background: #34495e53;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .menu-btn:hover {
+      background: #2c3e5075;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      z-index: 999;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    /* Caixa de opções lateral */
+    .menu-options {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 100%;
+      background: #2c3e50;
+      color: white;
+      padding: 30px;
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.4);
+      transform: translateX(100%);
+      transition: transform 0.4s ease;
+      z-index: 1000;
+    }
+
+    .menu-options.active {
+      transform: translateX(0);
+    }
+
+    .submenu {
+      margin: 15px 0;
+    }
+
+    .submenu strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 18px;
+      color: #ffd700;
+    }
+
+    .submenu a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      margin: 5px 0;
+      padding: 6px;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+
+    .submenu a:hover {
+      background: #4ca1af;
+    }
+
+    /* Conteúdo principal */
+    main {
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Quiz */
+    .quiz-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 600px;
+    }
+
+    .quiz-container h2 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .options button {
+      display: block;
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #4ca1af;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .options button:hover {
+      background: #2c3e50;
+    }
+
+    .progress-container {
+      margin-top: 20px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      background: #ddd;
+      height: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #4ca1af, #2c3e50);
+      transition: width 0.3s ease;
+    }
+
+    .feedback {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+     <h1><a href="index.html">English MedHub</a></h1>
+    <nav>
+      <a href="news.html">News</a>
+      <a href="Cefet.html">Cefet</a>
+      <a href="videos.html">Videos</a>
+      <a href="Quiz.html">Quiz</a>
+      <a href="recommendations.html">Recommendations</a>
+    </nav>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  </header>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+  <!-- Caixa lateral com opções -->
+  <div class="menu-options" id="menu">
+    <h3>⚙ Options</h3>
+    <div class="submenu">
+      <strong>Configurações</strong>
+      <a href="#">Perfil</a>
+      <a href="#">Idioma</a>
+      <a href="#">Tema</a>
+    </div>
+    <div class="submenu">
+      <strong>Créditos</strong>
+      <a href="#">Equipe</a>
+      <a href="#">Sobre o Projeto</a>
+    </div>
+    <div class="submenu">
+      <strong>Redirecionar</strong>
+      <a href="#">Página Inicial</a>
+      <a href="#">Ajuda</a>
+    </div>
+  </div>
+
+  <main>
+    <div class="quiz-container">
+      <h2 id="question-title">Loading...</h2>
+      <div id="question-content"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress"></div>
+        </div>
+        <p id="progress-text">0 / 10</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const quizData = [
+      { type: "choice", question: "How do you say 'Meu nome é João' in English?", options: ["My name is João", "I am João"], answer: "My name is João" },
+      { type: "choice", question: "What is the translation of 'Hello'?", options: ["Oi", "Tchau"], answer: "Oi" },
+      { type: "input", question: "Write in English: 'Eu gosto de aprender'", answer: "I like to learn" },
+      { type: "audio", question: "Listen and type what you hear:", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", answer: "music" },
+      { type: "choice", question: "How do you say 'Obrigado' in English?", options: ["Thanks", "Please"], answer: "Thanks" },
+      { type: "choice", question: "Select the correct sentence:", options: ["She are happy", "She is happy"], answer: "She is happy" },
+      { type: "input", question: "Translate to English: 'Eu estou cansado'", answer: "I am tired" },
+      { type: "audio", question: "Listen and type the number you hear:", audio: "https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav", answer: "Star Wars" },
+      { type: "choice", question: "How do you say 'Cachorro' in English?", options: ["Dog", "Cat"], answer: "Dog" },
+      { type: "input", question: "Write in English: 'Eu tenho 20 anos'", answer: "I am 20 years old" }
+    ];
+
+    let currentQuestion = 0;
+
+    function loadQuestion() {
+      const quiz = quizData[currentQuestion];
+      const title = document.getElementById("question-title");
+      const content = document.getElementById("question-content");
+      const feedback = document.getElementById("feedback");
+
+      feedback.textContent = "";
+      title.textContent = quiz.question;
+      content.innerHTML = "";
+
+      if (quiz.type === "choice") {
+        const div = document.createElement("div");
+        div.classList.add("options");
+        quiz.options.forEach(opt => {
+          const btn = document.createElement("button");
+          btn.textContent = opt;
+          btn.onclick = () => checkAnswer(opt);
+          div.appendChild(btn);
+        });
+        content.appendChild(div);
+      }
+
+      if (quiz.type === "input") {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = "Type your answer...";
+        const btn = document.createElement("button");
+        btn.textContent = "Submit";
+        btn.onclick = () => checkAnswer(input.value.trim());
+        content.appendChild(input);
+        content.appendChild(btn);
+      }
+
+      if (quiz.type === "audio") {
+        const audio = document.createElement("audio");
+        audio.controls = true;
+        audio.src = quiz.audio;
+        const input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = "Type what you hear...";
+        const btn = document.createElement("button");
+        btn.textContent = "Submit";
+        btn.onclick = () => checkAnswer(input.value.trim());
+        content.appendChild(audio);
+        content.appendChild(input);
+        content.appendChild(btn);
+      }
+
+      updateProgress();
+    }
+
+    function checkAnswer(userAnswer) {
+      const quiz = quizData[currentQuestion];
+      const feedback = document.getElementById("feedback");
+      if (userAnswer.toLowerCase() === quiz.answer.toLowerCase()) {
+        feedback.textContent = "✅ Correct!";
+        feedback.style.color = "green";
+      } else {
+        feedback.textContent = `❌ Wrong! Correct answer: ${quiz.answer}`;
+        feedback.style.color = "red";
+      }
+      setTimeout(() => {
+        currentQuestion++;
+        if (currentQuestion < quizData.length) {
+          loadQuestion();
+        } else {
+          document.getElementById("question-title").textContent = "🎉 Quiz Completed!";
+          document.getElementById("question-content").innerHTML = "";
+          document.getElementById("feedback").textContent = "Great job!";
+        }
+      }, 1500);
+    }
+
+    function updateProgress() {
+      const progress = document.getElementById("progress");
+      const progressText = document.getElementById("progress-text");
+      const percent = ((currentQuestion) / quizData.length) * 100;
+      progress.style.width = percent + "%";
+      progressText.textContent = `${currentQuestion} / ${quizData.length}`;
+    }
+
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      const overlay = document.getElementById("overlay");
+      menu.classList.toggle("active");
+      overlay.classList.toggle("active");
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>
