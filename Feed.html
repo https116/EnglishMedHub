@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English MedHub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+            <h1><a href="inicial.html">English MedHub</a></h1>
+    <nav>
+      <a href="news.html">News</a>
+      <a href="Watch & Learn.html">Watch & Learn</a>
+      <a href="Quiz.html">Quiz</a>
+      <a href="Feed.html">Feed</a>
+    </nav>
+    <!-- Botão só com ícone -->
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  </header>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+  <!-- Caixa lateral com opções -->
+  <div class="menu-options" id="menu">
+    <h3>Options</h3>
+    <div class="submenu">
+      <strong>Configurações</strong>
+      <a href="#">Perfil</a>
+      <a href="#">Idioma</a>
+      <a href="#">Tema</a>
+    </div>
+    <div class="submenu">
+      <strong>Créditos</strong>
+      <a href="#">Equipe</a>
+      <a href="index.html">Sobre o Projeto</a>
+      <a href="https://www.divinopolis.cefetmg.br/">Instituição</a>
+    </div>
+    <div class="submenu">
+      <strong>Redirecionar</strong>
+      <a href="#">Página Inicial</a>
+      <a href="#">Ajuda</a>
+    </div>
+  </div>
+
+ <section class="comic-section">
+  <div class="comic-container">
+    <h2>Tirinhas</h2>
+    <div class="comic-strip">
+      <img src="https://th.bing.com/th/id/R.7f31d920c007e3aa810499ac973a6c2f?rik=BzRI9EITpn6hwA&riu=http%3a%2f%2f1.bp.blogspot.com%2f-phqudAJUS_Y%2fT5w29zp-4xI%2fAAAAAAAAAhw%2f1Iu5YaTgSpI%2fs1600%2fgsf.png&ehk=VQm7xV%2f1zcSW9%2f4HnFQntfVOOkhYiBa2UrYXl0dUng0%3d&risl=&pid=ImgRaw&r=0" alt="Tirinha divertida sobre aprendizado em inglês">
+    </div>
+    <p class="comic-caption">disponivel em <a href="https://professorasimoneleite.blogspot.com/2012/04/tirinhas-em-ingles_28.html">fonte</a></p>
+  </div>
+</section>
+<section class="comic-section">
+  <div class="comic-container">
+    <div class="comic-strip">
+      <img src="imagens/buckles_ntb.png" alt="Tirinha divertida sobre aprendizado em inglês">
+    </div>
+    <p class="comic-caption">
+      disponível em <a href="https://comicskingdom.com/tiger/1965-12-15">fonte</a>
+    </p>
+  </div>
+</section>
+ <section class="comic-section">
+  <div class="comic-container">
+    <h2>Memes</h2>
+    <div class="comic-strip">
+      <img src="#" alt="#">
+    </div>
+    <p class="comic-caption">disponivel em <a href="#">fonte</a></p>
+  </div>
+</section>
+
+
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      const overlay = document.getElementById("overlay");
+      menu.classList.toggle("active");
+      overlay.classList.toggle("active");
+    }
+  </script>
+</body>
+</html>

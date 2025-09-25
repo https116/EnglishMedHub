@@ -1,0 +1,350 @@
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f9;
+    color: #333;
+}
+
+header {
+    background: linear-gradient(90deg, #2c3e50, #438b98);
+    color: white;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+header h1 {
+    font-size: 28px;
+    margin: 0;
+}
+
+header h1 a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: inherit;
+    position: relative;
+    display: inline-block;
+}
+
+/* animação underline */
+header h1 a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    /* cor da linha animada */
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+header h1 a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+nav a {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 8px 14px;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    font-size: 17px;
+    border-radius: 8px;
+    transition: transform 0.2s ease, color 0.2s ease;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+nav a:hover {
+    transform: scale(1.05);
+    color: AliceBlue;
+}
+
+.menu-btn {
+    font-size: 20px; /* menor tamanho */
+    padding: 8px 12px; /* menos espaçamento */
+    background: linear-gradient(135deg, #764ba220, #667eea26);
+    border: none;
+    border-radius: 8px; /* bordas arredondadas */
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.142);
+}
+
+.menu-btn:hover {
+    background: linear-gradient(135deg, #667eea53, #764ba23b);
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.14);
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.391);
+    display: none;
+    z-index: 999;
+}
+
+.overlay.active {
+    display: block;
+}
+
+.menu-options {
+    position: absolute;
+    top: 60px; /* posição logo abaixo do botão */
+    right: 20px; /* alinhado à direita do botão */
+    width: 250px;
+    background: linear-gradient(90deg, #2c3e50f1, #345779f5);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+    display: none; /* escondido por padrão */
+    z-index: 1000;
+}
+
+.menu-options.active {
+    display: block;
+}
+
+.menu-options h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 5px;
+}
+
+.submenu {
+    margin-bottom: 15px;
+}
+
+.submenu strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: aliceblue;
+}
+
+.submenu a {
+    display: block;
+    color: aliceblue;
+    text-decoration: none;
+    margin: 5px 0;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.submenu a:hover {
+    background: rgba(255, 255, 255, 0.024);
+    transform: translateX(3px);
+}
+
+.submenu a:hover {
+    background: #2e62688f;
+}
+
+/* Conteúdo principal */
+main {
+    padding: 40px;
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+/* Quiz */
+.quiz-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 600px;
+}
+
+.quiz-container h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.options button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #4ca1af;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.options button:hover {
+    background: #2c3e50;
+}
+
+.progress-container {
+    margin-top: 20px;
+}
+
+.progress-bar {
+    width: 100%;
+    background: #ddd;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #4ca1af, #2c3e50);
+    transition: width 0.3s ease;
+}
+
+.feedback {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+/* Seção de Notícias */
+.news-section {
+    background: #f9f9f9;
+    padding: 40px 20px;
+}
+
+.news-section .container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.news-section h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+.news-card {
+    display: flex;
+    flex-wrap: wrap;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+}
+
+.news-card img {
+    max-width: 400px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.news-content {
+    padding: 20px;
+    flex: 1;
+}
+
+.news-content h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #4a5c9b;
+}
+
+.news-content p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 15px;
+    color: #4ca1af;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.read-more:hover {
+    color: #2c3e50;
+}
+
+.read-more i {
+    margin-left: 5px;
+}
+/*seção Feed-tirinha*/
+
+.comic-section {
+    background: #fff;
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.comic-section h2 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.comic-strip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+}
+
+.comic-strip img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.comic-strip img:hover {
+    transform: scale(1.02);
+}
+
+.comic-caption {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+    color: #555;
+}
+
+
+

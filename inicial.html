@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English MedHub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+            <h1><a href="inicial.html">English MedHub</a></h1>
+    <nav>
+      <a href="news.html">News</a>
+      <a href="Watch & Learn.html">Watch & Learn</a>
+      <a href="Quiz.html">Quiz</a>
+      <a href="Feed.html">Feed</a>
+    </nav>
+    <!-- Botão só com ícone -->
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  </header>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+  <!-- Caixa lateral com opções -->
+  <div class="menu-options" id="menu">
+    <h3>Options</h3>
+    <div class="submenu">
+      <strong>Configurações</strong>
+      <a href="#">Perfil</a>
+      <a href="#">Idioma</a>
+      <a href="#">Tema</a>
+    </div>
+    <div class="submenu">
+      <strong>Créditos</strong>
+      <a href="#">Equipe</a>
+      <a href="index.html">Sobre o Projeto</a>
+      <a href="https://www.divinopolis.cefetmg.br/">Instituição</a>
+    </div>
+    <div class="submenu">
+      <strong>Redirecionar</strong>
+      <a href="#">Página Inicial</a>
+      <a href="#">Ajuda</a>
+    </div>
+  </div>
+
+ 
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      const overlay = document.getElementById("overlay");
+      menu.classList.toggle("active");
+      overlay.classList.toggle("active");
+    }
+  </script>
+</body>
+</html>
