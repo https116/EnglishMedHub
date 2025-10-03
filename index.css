@@ -299,7 +299,9 @@ header p {
    ============================== */
 .image-content {
     flex: 1;
-    text-align: center;
+    content: '✔';
+    top: 0;
+    color: #4CAF50;
 }
 
 .image-content img {
