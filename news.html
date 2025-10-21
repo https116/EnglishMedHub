@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=1024">
   <title>English MedHub</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
@@ -13,30 +14,38 @@
       display: flex;
       justify-content: center;
     }
+
     .news-section .container {
-      width: 100%; /* ocupa quase toda a tela */
-      max-width: 1200px; /* limite em telas grandes */
+      width: 100%;
+      /* ocupa quase toda a tela */
+      max-width: 1200px;
+      /* limite em telas grandes */
     }
+
     .news-card {
       background: rgb(255, 255, 255);
       border-radius: 8px;
       margin-bottom: 20px;
       overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
       max-width: 1200px;
     }
+
     .news-card img {
       width: 100%;
       height: auto;
     }
+
     .news-content {
       padding: 20px;
     }
+
     .news-content h3 {
       margin-top: 0;
     }
+
     .news-content small {
       color: gray;
       display: block;
@@ -44,6 +53,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <h1><a href="inicial.html">English MedHub</a></h1>
@@ -53,10 +63,10 @@
       <a href="Quiz.html">Quiz</a>
       <a href="Feed.html">Feed</a>
     </nav>
-  <div class="header-buttons">
-    <button class="tr" id="lang-btn" onclick="toggleLang()">EN</button>
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
-  </div>
+    <div class="header-buttons">
+      <button class="tr" id="lang-btn" onclick="toggleLang()">EN</button>
+      <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    </div>
   </header>
 
   <!-- Overlay -->
@@ -66,7 +76,8 @@
   <div class="menu-options" id="menu">
     <div class="submenu">
       <strong>Options</strong>
-      <a href="https://script.google.com/macros/s/AKfycbyulMSLhGiE1UEJWMkQhvQxdBrOAViqAjKJLpDFBb_b2RmgZ6IAKdT_7DiVv4QpZnz7/exec">Root</a>
+      <a
+        href="https://script.google.com/macros/s/AKfycbyulMSLhGiE1UEJWMkQhvQxdBrOAViqAjKJLpDFBb_b2RmgZ6IAKdT_7DiVv4QpZnz7/exec">Root</a>
       <a href="#">Tema</a>
     </div>
     <div class="submenu">
@@ -89,57 +100,57 @@
       </div>
     </section>
   </main>
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById("menu");
-    const overlay = document.getElementById("overlay");
-    menu.classList.toggle("active");
-    overlay.classList.toggle("active");
-  }
-
-  // --- SISTEMA DE NOTÍCIAS COM GOOGLE APPS SCRIPT ---
-  const API_URL = "https://script.google.com/macros/s/AKfycbwbAF_2YPesSVLeKQYkyqpLrfIwjkJr1MZnv73Ziz4JyPLOtgkj6QQjQ0V0Z9UHJWy2/exec";
-  let currentLang = "en"; 
-
-  function toggleLang() {
-    currentLang = currentLang === "pt" ? "en" : "pt";
-    document.getElementById("lang-btn").textContent = currentLang === "pt" ? "EN" : "PT";
-    fetchNews();
-  }
-
-  async function fetchNews() {
-    const newsList = document.getElementById("news-list");
-    newsList.innerHTML = "Carregando notícias...";
-
-    try {
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      renderNews(data);
-    } catch (error) {
-      newsList.innerHTML = "Erro ao carregar notícias.";
-      console.error(error);
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      const overlay = document.getElementById("overlay");
+      menu.classList.toggle("active");
+      overlay.classList.toggle("active");
     }
-  }
 
-  function renderNews(newsArray) {
-    const container = document.getElementById("news-list");
-    container.innerHTML = "";
+    // --- SISTEMA DE NOTÍCIAS COM GOOGLE APPS SCRIPT ---
+    const API_URL = "https://script.google.com/macros/s/AKfycbwbAF_2YPesSVLeKQYkyqpLrfIwjkJr1MZnv73Ziz4JyPLOtgkj6QQjQ0V0Z9UHJWy2/exec";
+    let currentLang = "en";
 
-    newsArray.forEach(news => {
-      // Limpa espaços extras nas chaves
-      const cleanedNews = {};
-      Object.keys(news).forEach(key => {
-        cleanedNews[key.trim()] = news[key];
-      });
+    function toggleLang() {
+      currentLang = currentLang === "pt" ? "en" : "pt";
+      document.getElementById("lang-btn").textContent = currentLang === "pt" ? "EN" : "PT";
+      fetchNews();
+    }
 
-      const title = cleanedNews["title_" + currentLang] || "Sem título";
-      const date = cleanedNews["dates"] ? new Date(cleanedNews["dates"]).toLocaleDateString() : "Sem data";
-      const content = cleanedNews["content_" + currentLang] || "Sem conteúdo";
-      const imageSrc = cleanedNews["imagens"] || "https://via.placeholder.com/300x200.png?text=Sem+Imagem";
+    async function fetchNews() {
+      const newsList = document.getElementById("news-list");
+      newsList.innerHTML = "Carregando notícias...";
 
-      const card = document.createElement("div");
-      card.classList.add("news-card");
-      card.innerHTML = `
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        renderNews(data);
+      } catch (error) {
+        newsList.innerHTML = "Erro ao carregar notícias.";
+        console.error(error);
+      }
+    }
+
+    function renderNews(newsArray) {
+      const container = document.getElementById("news-list");
+      container.innerHTML = "";
+
+      newsArray.forEach(news => {
+        // Limpa espaços extras nas chaves
+        const cleanedNews = {};
+        Object.keys(news).forEach(key => {
+          cleanedNews[key.trim()] = news[key];
+        });
+
+        const title = cleanedNews["title_" + currentLang] || "Sem título";
+        const date = cleanedNews["dates"] ? new Date(cleanedNews["dates"]).toLocaleDateString() : "Sem data";
+        const content = cleanedNews["content_" + currentLang] || "Sem conteúdo";
+        const imageSrc = cleanedNews["imagens"] || "https://via.placeholder.com/300x200.png?text=Sem+Imagem";
+
+        const card = document.createElement("div");
+        card.classList.add("news-card");
+        card.innerHTML = `
         <div class="news-content">
           <h3>${title}</h3>
           <small>${date}</small>
@@ -147,12 +158,13 @@
         </div>
         <img class="imgg" src="${imageSrc}" alt="${title}">
       `;
-      container.appendChild(card);
-    });
-  }
+        container.appendChild(card);
+      });
+    }
 
-  // Carrega notícias na inicialização
-  fetchNews();
-</script>
+    // Carrega notícias na inicialização
+    fetchNews();
+  </script>
 </body>
+
 </html>
